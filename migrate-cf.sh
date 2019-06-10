@@ -8,7 +8,7 @@ cfMigrate() {
         migrationsPath=Databases/${appName/tracker-/}-database
         
         appGuid=$(cf app $1 --guid)
-        credentials=$(cf curl v2/apps/${appGuid}/env | jq -r .system_env_json'.VCAP_SERVICES["p-mysql"][].credentials')
+        credentials=$(cf curl v2/apps/${appGuid}/env | jq -r .system_env_json'.VCAP_SERVICES["cleardb"][].credentials')
         
         database=$(echo ${credentials} | jq -r .name)
         username=$(echo ${credentials} | jq -r .username)
